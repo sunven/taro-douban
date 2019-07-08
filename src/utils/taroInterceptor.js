@@ -17,7 +17,7 @@ const customInterceptor = chain => {
       return showError(res.errMsg, showToast);
     })
     .then(res => {
-      return res.data;
+      return res;
     });
 };
 export default customInterceptor;

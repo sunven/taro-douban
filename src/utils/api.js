@@ -5,15 +5,17 @@ import interceptors from "./taroInterceptor";
 Taro.addInterceptor(interceptors);
 Taro.addInterceptor(Taro.interceptors.logInterceptor);
 Taro.addInterceptor(Taro.interceptors.timeoutInterceptor);
-
+const BASE_URL = "http://localhost:8001/v2/movie/";
 export default {
   baseOptions(params, method = "GET") {
     let { url, data } = params;
+    //data['apikey'] = "0df993c66c0c636e29ecbb5344252a4a";
+    url+="?apikey=0df993c66c0c636e29ecbb5344252a4a";
     let contentType = "application/json";
     contentType = params.contentType || contentType;
     const option = {
-      //url: url.indexOf("http") !== -1 ? url : BASE_URL + url,
-      url: url,
+      url: url.indexOf("http") !== -1 ? url : BASE_URL + url,
+      //url: url,
       data: data,
       method: method,
       header: {
