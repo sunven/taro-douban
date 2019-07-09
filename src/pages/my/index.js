@@ -1,28 +1,41 @@
-import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
-import './index.scss'
+import Taro, { Component } from "@tarojs/taro";
+import { View, AtList, AtListItem } from "@tarojs/components";
+import "./index.scss";
 
 export default class Index extends Component {
-
   config = {
-    navigationBarTitleText: '首页'
-  }
+    navigationBarTitleText: "首页"
+  };
 
-  componentWillMount () { }
+  componentWillMount() {}
 
-  componentDidMount () { }
+  componentDidMount() {}
 
-  componentWillUnmount () { }
+  componentWillUnmount() {}
 
-  componentDidShow () { }
+  componentDidShow() {}
 
-  componentDidHide () { }
+  componentDidHide() {}
 
-  render () {
+  render() {
     return (
-      <View className='index'>
-        <Text>Hello world!</Text>
+      <View className="index">
+        <AtList>
+          <AtListItem
+            title="标题文字"
+            note="描述信息"
+            arrow="right"
+            iconInfo={{ size: 25, color: "#78A4FA", value: "calendar" }}
+          />
+          <AtListItem
+            title="标题文字"
+            note="描述信息"
+            extraText="详细信息"
+            arrow="right"
+            iconInfo={{ size: 25, color: "#FF4949", value: "bookmark" }}
+          />
+        </AtList>
       </View>
-    )
+    );
   }
 }
