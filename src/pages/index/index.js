@@ -1,28 +1,45 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Swiper, SwiperItem, Image } from "@tarojs/components";
+import { AtSearchBar, AtList, AtListItem } from "taro-ui";
 import api from "../../utils/api";
-import urlTransfer from '../../utils/urlTransfer'
+import urlTransfer from "../../utils/urlTransfer";
 import "./index.scss";
 
 export default class Index extends Component {
   constructor() {
     super(...arguments);
     this.state = {
-      topArr: []
+      value: "",
+      topArr: [],
+      hotArr: []
     };
   }
   config = {
     navigationBarTitleText: "首页"
   };
-
-  componentWillMount() {
+  onChange(value) {
+    this.setState({
+      value: value
+    });
   }
+  onActionClick() {
+    console.log("开始搜索");
+  }
+  atListItemOnClick(){
+    Taro.navigateTo({
+      url:'../hot/index'
+    }).then(c=>{
+
+    });
+  }
+  componentWillMount() {}
 
   componentDidMount() {
     api.get("nowplaying").then(res => {
-      console.log(res.data.entries.slice(0, 3));
-      this.setState({topArr:res.data.entries.slice(0, 3)});
-    });}
+      this.setState({ topArr: res.data.entries.slice(0, 3) });
+      this.setState({ hotArr: res.data.entries.slice(0, 6) });
+    });
+  }
 
   componentWillUnmount() {}
 
@@ -31,9 +48,17 @@ export default class Index extends Component {
   componentDidHide() {}
 
   render() {
-    let { topArr } = this.state;
+    let { topArr, hotArr } = this.state;
     return (
-      <View className='home__banner'>
+      <View className="home__banner">
+        <View>
+          <AtSearchBar
+            actionName="搜一下"
+            value={this.state.value}
+            onChange={this.onChange.bind(this)}
+            onActionClick={this.onActionClick.bind(this)}
+          />
+        </View>
         <Swiper
           className="home__banner"
           indicatorColor="#999"
@@ -42,7 +67,7 @@ export default class Index extends Component {
           indicatorDots
           autoplay
         >
-          {topArr.map((item,index) => {
+          {topArr.map((item, index) => {
             return (
               <SwiperItem key={index}>
                 <Image src={urlTransfer(item.images.small)} />
@@ -50,6 +75,22 @@ export default class Index extends Component {
             );
           })}
         </Swiper>
+        {/* <View className="at-row">
+          <View className="at-col panel-left">院线热映</View>
+          <View className="at-col panel-right">全部></View>
+        </View> */}
+        <AtList>
+          <AtListItem title="院线热映" onClick={this.atListItemOnClick.bind(this)} arrow="right" />
+        </AtList>
+        <View className="at-row at-row--wrap">
+          {hotArr.map((item, index) => {
+            return (
+              <View key={index} className="at-col at-col-4">
+                <Image src={urlTransfer(item.images.small)} />
+              </View>
+            );
+          })}
+        </View>
       </View>
     );
   }

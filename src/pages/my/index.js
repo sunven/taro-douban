@@ -1,5 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, AtList, AtListItem } from "@tarojs/components";
+import { View } from "@tarojs/components";
+import { AtAvatar,AtList, AtListItem } from "taro-ui"
 import "./index.scss";
 
 export default class Index extends Component {
@@ -20,19 +21,32 @@ export default class Index extends Component {
   render() {
     return (
       <View className="index">
+        <AtAvatar size="large" circle image='https://jdc.jd.com/img/200'></AtAvatar>
         <AtList>
           <AtListItem
-            title="标题文字"
-            note="描述信息"
+            title="项目地址"
             arrow="right"
             iconInfo={{ size: 25, color: "#78A4FA", value: "calendar" }}
           />
           <AtListItem
-            title="标题文字"
-            note="描述信息"
-            extraText="详细信息"
+            title="Taro技术群"
             arrow="right"
             iconInfo={{ size: 25, color: "#FF4949", value: "bookmark" }}
+          />
+          <AtListItem
+            title="微信号"
+            arrow="right"
+            iconInfo={{ size: 25, color: "#78A4FA", value: "calendar" }}
+          />
+          <AtListItem
+            title="公众号"
+            arrow="right"
+            iconInfo={{ size: 25, color: "#FF4949", value: "bookmark" }}
+          />
+          <AtListItem
+            title="API文档"
+            arrow="right"
+            iconInfo={{ size: 25, color: "#78A4FA", value: "calendar" }}
           />
         </AtList>
       </View>
