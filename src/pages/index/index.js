@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Swiper, SwiperItem, Image } from "@tarojs/components";
 import api from "../../utils/api";
+import urlTransfer from '../../utils/urlTransfer'
 import "./index.scss";
 
 export default class Index extends Component {
@@ -41,10 +42,10 @@ export default class Index extends Component {
           indicatorDots
           autoplay
         >
-          {topArr.map(item => {
+          {topArr.map((item,index) => {
             return (
-              <SwiperItem key={item.id}>
-                <Image src={item.images.small1} />
+              <SwiperItem key={index}>
+                <Image src={urlTransfer(item.images.small)} />
               </SwiperItem>
             );
           })}
