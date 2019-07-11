@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { AtAvatar,AtList, AtListItem } from "taro-ui"
+import { AtAvatar, AtList, AtListItem } from "taro-ui";
 import "./index.scss";
 
 export default class Index extends Component {
@@ -21,7 +21,7 @@ export default class Index extends Component {
   render() {
     return (
       <View className="index">
-        <AtAvatar size="large" circle image='https://jdc.jd.com/img/200'></AtAvatar>
+        <AtAvatar size="large" circle image="https://jdc.jd.com/img/200" />
         <AtList>
           <AtListItem
             title="项目地址"
