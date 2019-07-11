@@ -1,4 +1,22 @@
-.view-left{
-    width:200PX;
-    height: 100px;
+
+.nowplaying-view{
+    height: 280px;;
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+}
+.nowplaying-view-img {
+  width: 200px;
+  height: 280px;
+}
+.nowplaying-view-desc{
+    white-space:normal;
+    font-size: 16PX;
+}
+.nowplaying-view-rate{
+    margin: 8px 0;
+}
+.nowplaying-view-star{
+    height: 280px;
+    line-height: 280px;
+    text-align: center;
 }
