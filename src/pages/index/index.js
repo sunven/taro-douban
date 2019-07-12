@@ -1,6 +1,9 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Swiper, SwiperItem, Image } from "@tarojs/components";
 import { AtSearchBar, AtList, AtListItem, AtSegmentedControl } from "taro-ui";
+import Banner from "../../components/banner";
+import TopList from "../../components/topList";
+import TabPanel from "../../components/tabpanel";
 import api from "../../utils/api";
 import urlTransfer from "../../utils/urlTransfer";
 import "./index.scss";
@@ -13,13 +16,16 @@ export default class Index extends Component {
       topArr: [],
       hotArr: [],
       comingArr: [],
-      current: 0,
-      AtSegmentedControlArr: ["新片", "北美", "口碑", "top250"],
+      AtSegmentedControlArr: [
+        { title: "新片" },
+        { title: "北美" },
+        { title: "口碑" },
+        { title: "top250" }
+      ],
       newTopArr: [],
-      usTopArr:[],
-      weeklyTopArr:[],
-      top250Arr:[]
-
+      usTopArr: [],
+      weeklyTopArr: [],
+      top250Arr: []
     };
   }
   config = {
@@ -32,16 +38,6 @@ export default class Index extends Component {
   }
   onActionClick() {
     console.log("开始搜索");
-  }
-  atListItemOnClick() {
-    Taro.navigateTo({
-      url: "../hot/index"
-    }).then(c => {});
-  }
-  handleClick(value) {
-    this.setState({
-      current: value
-    });
   }
   componentWillMount() {}
 
@@ -82,7 +78,10 @@ export default class Index extends Component {
       hotArr,
       comingArr,
       AtSegmentedControlArr,
-      newTopArr,usTopArr,weeklyTopArr,top250Arr
+      newTopArr,
+      usTopArr,
+      weeklyTopArr,
+      top250Arr
     } = this.state;
     return (
       <View className="home__banner">
@@ -94,60 +93,14 @@ export default class Index extends Component {
             onActionClick={this.onActionClick.bind(this)}
           />
         </View>
-        <Swiper
-          className="home__banner"
-          indicatorColor="#999"
-          indicatorActiveColor="#333"
-          circular
-          indicatorDots
-          autoplay
-        >
-          {topArr.map((item, index) => {
-            return (
-              <SwiperItem key={index}>
-                <Image src={urlTransfer(item.images.small)} />
-              </SwiperItem>
-            );
-          })}
-        </Swiper>
-        {/* <View className="at-row">
-          <View className="at-col panel-left">院线热映</View>
-          <View className="at-col panel-right">全部></View>
-        </View> */}
-        <AtList>
-          <AtListItem
-            title="院线热映"
-            onClick={this.atListItemOnClick.bind(this)}
-            arrow="right"
-          />
-        </AtList>
-        <View className="at-row at-row--wrap">
-          {hotArr.map((item, index) => {
-            return (
-              <View key={index} className="at-col at-col-4">
-                <Image src={urlTransfer(item.images.small)} />
-              </View>
-            );
-          })}
-        </View>
-
-        <AtList>
-          <AtListItem
-            title="即将上映"
-            onClick={this.atListItemOnClick.bind(this)}
-            arrow="right"
-          />
-        </AtList>
-        <View className="at-row at-row--wrap">
-          {comingArr.map((item, index) => {
-            return (
-              <View key={index} className="at-col at-col-4">
-                <Image src={urlTransfer(item.images.small)} />
-              </View>
-            );
-          })}
-        </View>
-        <AtSegmentedControl
+        <Banner data={topArr} />
+        <TopList title="院线热映" url="../hot/index" data={hotArr} />
+        <TopList title="即将上映" data={comingArr} />
+        <TabPanel
+          tabName={AtSegmentedControlArr}
+          panelData={[newTopArr, usTopArr, weeklyTopArr, top250Arr]}
+        />
+        {/* <AtSegmentedControl
           values={AtSegmentedControlArr}
           onClick={this.handleClick.bind(this)}
           current={this.state.current}
@@ -155,50 +108,31 @@ export default class Index extends Component {
         {this.state.current === 0 ? (
           <AtList>
             {newTopArr.map((item, index) => {
-              return (
-                <AtListItem
-                  key={index}
-                  title={item.title}
-                />
-              );
+              return <AtListItem key={index} title={item.title} />;
             })}
           </AtList>
         ) : null}
         {this.state.current === 1 ? (
           <AtList>
-          {usTopArr.map((item, index) => {
-            return (
-              <AtListItem
-                key={index}
-                title={item.subject.title}
-              />
-            );
-          })}
-        </AtList>
+            {usTopArr.map((item, index) => {
+              return <AtListItem key={index} title={item.subject.title} />;
+            })}
+          </AtList>
         ) : null}
         {this.state.current === 2 ? (
           <AtList>
-          {weeklyTopArr.map((item, index) => {
-            return (
-              <AtListItem
-                key={index}
-                title={item.subject.title}
-              />
-            );
-          })}
-        </AtList>
-        ) : null}{this.state.current === 3 ? (
-          <AtList>
-          {top250Arr.map((item, index) => {
-            return (
-              <AtListItem
-                key={index}
-                title={item.title}
-              />
-            );
-          })}
-        </AtList>
+            {weeklyTopArr.map((item, index) => {
+              return <AtListItem key={index} title={item.subject.title} />;
+            })}
+          </AtList>
         ) : null}
+        {this.state.current === 3 ? (
+          <AtList>
+            {top250Arr.map((item, index) => {
+              return <AtListItem key={index} title={item.title} />;
+            })}
+          </AtList>
+        ) : null} */}
       </View>
     );
   }

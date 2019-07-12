@@ -5,7 +5,7 @@ import interceptors from "./taroInterceptor";
 Taro.addInterceptor(interceptors);
 Taro.addInterceptor(Taro.interceptors.logInterceptor);
 Taro.addInterceptor(Taro.interceptors.timeoutInterceptor);
-const BASE_URL = "http://localhost:8001/v2/movie/";
+const BASE_URL = "http://192.168.1.3:8001/v2/movie/";
 export default {
   baseOptions(params, method = "GET") {
     let { url, data } = params;
